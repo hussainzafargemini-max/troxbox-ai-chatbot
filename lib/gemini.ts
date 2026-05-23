@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GEMINI_SAFE_RESPONSE } from '@/lib/guards';
 
 const apiKey = process.env.GEMINI_API_KEY;
 
@@ -78,13 +79,13 @@ export async function generateChatStream(
 
         // Close the stream once all tokens are sent
         controller.close();
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('Gemini chat streaming error:', error);
-        
-        // Write the error block to SSE stream
-        const errorMessage = error?.message || 'Server error occurred while generating response.';
+
+        const safeText = GEMINI_SAFE_RESPONSE;
+
         controller.enqueue(
-          encoder.encode(`data: ${JSON.stringify({ error: errorMessage })}\n\n`)
+          encoder.encode(`data: ${JSON.stringify({ text: safeText })}\n\n`)
         );
         controller.close();
       }

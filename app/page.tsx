@@ -1,15 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, ShoppingBag, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
+import ProductCard, { ProductItem } from '@/components/ProductCard';
 
-const products = [
+const products: ProductItem[] = [
   {
     id: 1,
     name: 'Signature Oversized Hoodie',
     category: 'Hoodies',
     price: '$85.00',
     color: 'Carbon Black',
-    gradient: 'from-zinc-800 to-zinc-950'
+    gradient: 'from-zinc-800 via-indigo-950 to-zinc-950',
+    badge: 'Bestseller',
+    image:
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 2,
@@ -17,7 +21,10 @@ const products = [
     category: 'T-Shirts',
     price: '$38.00',
     color: 'Alabaster White',
-    gradient: 'from-zinc-100 to-zinc-300'
+    gradient: 'from-zinc-100 via-indigo-100 to-zinc-300',
+    badge: 'New',
+    image:
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 3,
@@ -25,7 +32,9 @@ const products = [
     category: 'Denim',
     price: '$110.00',
     color: 'Raw Indigo',
-    gradient: 'from-blue-900 to-slate-950'
+    gradient: 'from-blue-900 via-indigo-900 to-slate-950',
+    image:
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 4,
@@ -33,7 +42,10 @@ const products = [
     category: 'Outerwear',
     price: '$145.00',
     color: 'Olive Drab',
-    gradient: 'from-olive-800 to-emerald-950'
+    gradient: 'from-olive-800 via-zinc-900 to-emerald-950',
+    badge: 'Limited',
+    image:
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 5,
@@ -41,7 +53,9 @@ const products = [
     category: 'Loungewear',
     price: '$65.00',
     color: 'Heather Gray',
-    gradient: 'from-zinc-300 to-zinc-500'
+    gradient: 'from-zinc-300 via-indigo-200 to-zinc-500',
+    image:
+      'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 6,
@@ -49,8 +63,10 @@ const products = [
     category: 'Accessories',
     price: '$28.00',
     color: 'Burnt Orange',
-    gradient: 'from-amber-600 to-amber-950'
-  }
+    gradient: 'from-amber-600 via-orange-800 to-amber-950',
+    image:
+      'https://images.unsplash.com/photo-1576871334176-52ef066602cf?auto=format&fit=crop&w=800&q=80',
+  },
 ];
 
 export default function Home() {
@@ -175,40 +191,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <div 
-              key={product.id}
-              className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-100 transition-all duration-300 group flex flex-col h-full"
-            >
-              {/* Product Aesthetic Gradient Card Placeholder (Mock Image) */}
-              <div className={`h-64 bg-gradient-to-br ${product.gradient} flex items-center justify-center p-6 relative`}>
-                <span className="absolute top-4 left-4 bg-white/95 text-zinc-900 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase shadow-sm">
-                  {product.category}
-                </span>
-                <div className="text-center transform group-hover:scale-105 transition-transform duration-300">
-                  <span className="block text-2xl font-black uppercase tracking-widest opacity-25 text-white">
-                    TROX BOX
-                  </span>
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-400 font-semibold">{product.color}</span>
-                    <span className="text-sm font-black text-gray-900">{product.price}</span>
-                  </div>
-                  <h3 className="text-base font-extrabold text-gray-800 mt-1">{product.name}</h3>
-                </div>
-                
-                <button
-                  className="w-full bg-zinc-900 hover:bg-indigo-600 active:bg-indigo-700 text-white py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm focus:outline-none"
-                  title="Add to Shopping Cart"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
