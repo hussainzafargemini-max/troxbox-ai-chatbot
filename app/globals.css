@@ -1,11 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 9, 9, 11;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --color-bg: #0a0a0a;
+  --color-surface: #141414;
+  --color-surface-2: #1a1a1a;
+  --color-surface-3: #222222;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-text: #f5f0eb;
+  --color-text-secondary: #8a8580;
+  --color-text-muted: #5a5550;
+  --color-accent: #c9a87c;
+  --color-accent-dim: rgba(201, 168, 124, 0.15);
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
 }
 
 * {
@@ -14,339 +27,392 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-end-rgb));
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-}
-
 ::selection {
-  background: rgba(99, 102, 241, 0.22);
-  color: #111827;
+  background: rgba(201, 168, 124, 0.25);
+  color: #ffffff;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-/* ===========================
-   Trox Box Premium 3D Hero
-   =========================== */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-.tb-hero-stage {
-  perspective: 1200px;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ========================================
+   GRAIN OVERLAY
+   ======================================== */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+  opacity: 0.5;
+}
+
+/* ========================================
+   HERO 3D STAGE
+   ======================================== */
+.hero-stage {
+  perspective: 1400px;
   transform-style: preserve-3d;
 }
 
-.tb-hero-glow {
-  position: absolute;
-  inset: 9% 9%;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 35% 35%, rgba(129, 140, 248, 0.52), transparent 35%),
-    radial-gradient(circle at 70% 65%, rgba(217, 70, 239, 0.34), transparent 38%),
-    rgba(255, 255, 255, 0.04);
-  filter: blur(42px);
-  opacity: 0.86;
-  animation: tbGlowPulse 5.8s ease-in-out infinite alternate;
-}
-
-.tb-hero-orbit {
+.hero-orbit {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation: tbOrbitSpin 28s linear infinite;
+  animation: heroOrbitSpin 32s linear infinite;
 }
 
-.tb-hero-card {
+.hero-card {
   --card-angle: calc(var(--i) * 90deg);
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(42vw, 238px);
-  height: 318px;
+  width: min(44vw, 240px);
+  height: 320px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 28px;
-  background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.045));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.44),
-    inset 0 1px 0 rgba(255, 255, 255, 0.20);
-  backdrop-filter: blur(16px);
+    0 32px 100px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
   transform:
     translate(-50%, -50%)
     rotateY(var(--card-angle))
-    translateZ(260px)
+    translateZ(280px)
     rotateY(calc(var(--card-angle) * -1))
     rotateX(4deg);
+  transition: box-shadow 0.4s ease;
 }
 
-.tb-hero-card-image {
+.hero-card:hover {
+  box-shadow:
+    0 32px 100px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(201, 168, 124, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.hero-card-image {
   position: absolute;
   inset: 0;
-  background-color: #111827;
+  background-color: #111;
   background-position: center;
   background-size: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tb-hero-card:hover .tb-hero-card-image {
-  transform: scale(1.06);
+.hero-card:hover .hero-card-image {
+  transform: scale(1.08);
 }
 
-.tb-hero-card-meta {
+.hero-card-meta {
   position: absolute;
-  bottom: 14px;
-  left: 14px;
-  right: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
-  background: rgba(3, 7, 18, 0.62);
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(10, 10, 10, 0.75);
   padding: 12px 14px;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
 }
 
-.tb-hero-card-meta span {
+.hero-card-meta span {
   display: block;
-  font-size: 12px;
-  font-weight: 900;
-  color: white;
-  letter-spacing: -0.01em;
+  font-size: 11px;
+  font-weight: 700;
+  color: #f5f0eb;
+  letter-spacing: 0.02em;
 }
 
-.tb-hero-card-meta small {
+.hero-card-meta small {
   display: block;
   margin-top: 3px;
   font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.72);
+  color: rgba(201, 168, 124, 0.7);
 }
 
-.tb-hero-device {
+/* HERO CENTER DEVICE */
+.hero-device {
   position: absolute;
   left: 50%;
   top: 50%;
   width: min(88vw, 360px);
-  height: 430px;
+  height: 440px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 34px;
-  background: linear-gradient(155deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background: linear-gradient(155deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   box-shadow:
-    0 34px 100px rgba(0, 0, 0, 0.52),
-    0 0 0 10px rgba(255, 255, 255, 0.035),
-    inset 0 1px 0 rgba(255, 255, 255, 0.24);
-  transform: translate(-50%, -50%) rotateX(9deg) rotateY(-10deg);
+    0 40px 120px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translate(-50%, -50%) rotateX(8deg) rotateY(-8deg);
   transform-style: preserve-3d;
-  animation: tbDeviceFloat 6.5s ease-in-out infinite;
-  backdrop-filter: blur(18px);
+  animation: heroDeviceFloat 7s ease-in-out infinite;
+  backdrop-filter: blur(20px);
 }
 
-.tb-device-top {
-  position: absolute;
-  left: 18px;
-  top: 16px;
-  z-index: 3;
-  display: flex;
-  gap: 7px;
-}
-
-.tb-device-image {
+.hero-device-image {
   position: absolute;
   inset: 0;
-  background-color: #111827;
+  background-color: #111;
   background-position: center;
   background-size: cover;
 }
 
-.tb-device-content {
+.hero-device-content {
   position: absolute;
-  bottom: 18px;
-  left: 18px;
-  right: 18px;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
   z-index: 3;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 24px;
-  background: rgba(3, 7, 18, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(10, 10, 10, 0.75);
   padding: 16px;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
 }
 
-.tb-floating-chip {
+/* FLOATING CHIPS */
+.hero-chip {
   position: absolute;
   z-index: 5;
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 999px;
-  background: rgba(3, 7, 18, 0.68);
-  padding: 10px 14px;
-  color: white;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.36);
-  backdrop-filter: blur(16px);
+  background: rgba(10, 10, 10, 0.8);
+  padding: 10px 16px;
+  color: #f5f0eb;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
 }
 
-.tb-chip-one {
+.hero-chip-1 {
   left: 2%;
   top: 18%;
-  animation: tbChipFloatA 5s ease-in-out infinite;
+  animation: chipFloat1 5.5s ease-in-out infinite;
 }
 
-.tb-chip-two {
-  right: 3%;
-  bottom: 17%;
-  animation: tbChipFloatB 5.6s ease-in-out infinite;
+.hero-chip-2 {
+  right: 2%;
+  bottom: 16%;
+  animation: chipFloat2 6s ease-in-out infinite;
 }
 
-/* Product-card polish if existing ProductCard uses normal image/card structure */
-#catalog article,
-#catalog .product-card,
-#catalog [data-product-card="true"] {
-  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+/* HERO GLOW */
+.hero-glow {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(201, 168, 124, 0.2), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(201, 168, 124, 0.12), transparent 40%);
+  filter: blur(60px);
+  opacity: 0.7;
+  animation: glowPulse 6s ease-in-out infinite alternate;
 }
 
-#catalog article:hover,
-#catalog .product-card:hover,
-#catalog [data-product-card="true"]:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 28px 80px rgba(17, 24, 39, 0.12);
+/* ========================================
+   PRODUCT CARD STYLES
+   ======================================== */
+.product-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
 }
 
-@keyframes tbOrbitSpin {
-  0% {
-    transform: rotateX(2deg) rotateY(0deg);
-  }
-  100% {
-    transform: rotateX(2deg) rotateY(360deg);
-  }
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes tbDeviceFloat {
-  0%, 100% {
-    transform: translate(-50%, -50%) rotateX(9deg) rotateY(-10deg) translateY(0);
-  }
-  50% {
-    transform: translate(-50%, -50%) rotateX(7deg) rotateY(-4deg) translateY(-14px);
-  }
+.product-card .product-image {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes tbGlowPulse {
-  from {
-    transform: scale(0.96);
-    opacity: 0.62;
-  }
-  to {
-    transform: scale(1.08);
-    opacity: 0.92;
-  }
+.product-card:hover .product-image {
+  transform: scale(1.06);
 }
 
-@keyframes tbChipFloatA {
-  0%, 100% {
-    transform: translate3d(0, 0, 30px);
-  }
-  50% {
-    transform: translate3d(10px, -12px, 30px);
-  }
+/* ========================================
+   LUXURY BUTTON
+   ======================================== */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes tbChipFloatB {
-  0%, 100% {
-    transform: translate3d(0, 0, 30px);
-  }
-  50% {
-    transform: translate3d(-12px, 10px, 30px);
-  }
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
+.btn-luxury:hover::before {
+  opacity: 1;
+}
+
+.btn-luxury:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(201, 168, 124, 0.2);
+}
+
+.btn-luxury:active {
+  transform: scale(0.98);
+}
+
+/* ========================================
+   GLASSMORPHIC SURFACES
+   ======================================== */
+.glass {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ========================================
+   KEYFRAMES
+   ======================================== */
+@keyframes heroOrbitSpin {
+  0% { transform: rotateX(2deg) rotateY(0deg); }
+  100% { transform: rotateX(2deg) rotateY(360deg); }
+}
+
+@keyframes heroDeviceFloat {
+  0%, 100% { transform: translate(-50%, -50%) rotateX(8deg) rotateY(-8deg) translateY(0); }
+  50% { transform: translate(-50%, -50%) rotateX(6deg) rotateY(-4deg) translateY(-16px); }
+}
+
+@keyframes glowPulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  100% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes chipFloat1 {
+  0%, 100% { transform: translate3d(0, 0, 30px); }
+  50% { transform: translate3d(8px, -14px, 30px); }
+}
+
+@keyframes chipFloat2 {
+  0%, 100% { transform: translate3d(0, 0, 30px); }
+  50% { transform: translate3d(-10px, 12px, 30px); }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (max-width: 1023px) {
-  .tb-hero-stage {
-    max-width: 520px;
-  }
-
-  .tb-hero-card {
-    width: 188px;
-    height: 252px;
+  .hero-stage { max-width: 520px; }
+  .hero-card {
+    width: 190px;
+    height: 260px;
     transform:
       translate(-50%, -50%)
       rotateY(var(--card-angle))
-      translateZ(208px)
+      translateZ(220px)
       rotateY(calc(var(--card-angle) * -1))
       rotateX(4deg);
   }
-
-  .tb-hero-device {
-    width: min(82vw, 320px);
-    height: 392px;
-  }
+  .hero-device { width: min(82vw, 320px); height: 400px; }
 }
 
 @media (max-width: 640px) {
-  .tb-hero-stage {
-    height: 420px;
-    perspective: 900px;
-  }
-
-  .tb-hero-orbit {
-    opacity: 0.72;
-    animation-duration: 34s;
-  }
-
-  .tb-hero-card {
-    width: 150px;
-    height: 210px;
-    border-radius: 22px;
+  .hero-stage { height: 420px; perspective: 900px; }
+  .hero-orbit { opacity: 0.6; animation-duration: 38s; }
+  .hero-card {
+    width: 140px; height: 200px; border-radius: 18px;
     transform:
       translate(-50%, -50%)
       rotateY(var(--card-angle))
-      translateZ(158px)
+      translateZ(160px)
       rotateY(calc(var(--card-angle) * -1))
       rotateX(4deg);
   }
-
-  .tb-hero-device {
-    width: min(82vw, 270px);
-    height: 350px;
-    border-radius: 28px;
-  }
-
-  .tb-floating-chip {
-    display: none;
-  }
-
-  .tb-device-content {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+  .hero-device { width: min(82vw, 270px); height: 350px; border-radius: 22px; }
+  .hero-chip { display: none; }
+  .hero-device-content { flex-direction: column; align-items: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tb-hero-orbit,
-  .tb-hero-device,
-  .tb-hero-glow,
-  .tb-chip-one,
-  .tb-chip-two {
+  .hero-orbit, .hero-device, .hero-glow,
+  .hero-chip-1, .hero-chip-2 {
     animation: none !important;
   }
+  .product-card:hover { transform: none; }
+}
+
+/* ========================================
+   ADMIN PANEL DARK OVERRIDES
+   ======================================== */
+.admin-panel input,
+.admin-panel textarea,
+.admin-panel select {
+  background: var(--color-surface-2) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--color-text) !important;
+}
+
+.admin-panel input::placeholder,
+.admin-panel textarea::placeholder {
+  color: var(--color-text-muted) !important;
+}
+
+.admin-panel input:focus,
+.admin-panel textarea:focus,
+.admin-panel select:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent) !important;
 }

@@ -128,8 +128,8 @@ export default function ChatbotSettingsPage() {
   if (loading) {
     return (
       <div className="p-12 flex flex-col items-center justify-center space-y-3">
-        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
-        <span className="text-xs font-bold text-gray-400">Loading settings panel...</span>
+        <Loader2 className="w-8 h-8 animate-spin text-[#c9a87c]" />
+        <span className="text-xs font-bold text-[#5a5550]">Loading settings panel...</span>
       </div>
     );
   }
@@ -139,26 +139,26 @@ export default function ChatbotSettingsPage() {
       
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-black text-gray-900 tracking-tight flex items-center space-x-2">
-          <Settings className="w-6 h-6 text-indigo-600" />
+        <h1 className="text-2xl font-black text-[#f5f0eb] tracking-tight flex items-center space-x-2">
+          <Settings className="w-6 h-6 text-[#c9a87c]" />
           <span>Chatbot Settings</span>
         </h1>
-        <p className="text-xs text-gray-500 font-semibold mt-1">
+        <p className="text-xs text-[#5a5550] font-semibold mt-1">
           Customize your customer-facing AI agent. Edit branding names, custom welcome/fallback text blocks, primary widget color themes, and allowed topic tags.
         </p>
       </div>
 
       {/* Notifications */}
       {errorMsg && (
-        <div className="p-4 bg-red-50 border border-red-100 rounded-2xl flex items-start space-x-2.5 text-xs text-red-600 animate-in fade-in slide-in-from-top-2 duration-200">
-          <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+        <div className="p-4 bg-red-500/10 border border-red-500/10 rounded-2xl flex items-start space-x-2.5 text-xs text-red-400">
+          <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
           <p className="font-semibold leading-relaxed">{errorMsg}</p>
         </div>
       )}
 
       {successMsg && (
-        <div className="p-4 bg-green-50 border border-green-100 rounded-2xl flex items-start space-x-2.5 text-xs text-green-600 animate-in fade-in slide-in-from-top-2 duration-200">
-          <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+        <div className="p-4 bg-emerald-500/10 border border-emerald-500/10 rounded-2xl flex items-start space-x-2.5 text-xs text-emerald-400">
+          <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
           <p className="font-semibold leading-relaxed">{successMsg}</p>
         </div>
       )}
@@ -167,15 +167,15 @@ export default function ChatbotSettingsPage() {
       <form onSubmit={handleSaveSettings} className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Left Side: Branding & Prompts (2 Columns) */}
-        <div className="md:col-span-2 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-5">
+        <div className="md:col-span-2 bg-[#141414] border border-white/[0.04] rounded-2xl p-6 shadow-sm space-y-5">
           
-          <h3 className="text-sm font-bold text-gray-800 border-b border-gray-100 pb-3 flex items-center space-x-1.5">
+          <h3 className="text-sm font-bold text-[#f5f0eb] border-b border-white/[0.04] pb-3 flex items-center space-x-1.5">
             <span>Agent Styling & Conversational Texts</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block ml-1">
+              <label className="text-[10px] font-black text-[#5a5550] uppercase tracking-widest block ml-1">
                 Business Brand Name
               </label>
               <input
@@ -184,12 +184,12 @@ export default function ChatbotSettingsPage() {
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="e.g. Trox Box"
-                className="w-full bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-2.5 text-xs focus:outline-none text-gray-800"
+                className="w-full bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-4 py-2.5 text-xs focus:outline-none text-[#f5f0eb]"
               />
             </div>
             
             <div className="space-y-1">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block ml-1">
+              <label className="text-[10px] font-black text-[#5a5550] uppercase tracking-widest block ml-1">
                 Chatbot Agent Name
               </label>
               <input
@@ -198,13 +198,13 @@ export default function ChatbotSettingsPage() {
                 value={botName}
                 onChange={(e) => setBotName(e.target.value)}
                 placeholder="e.g. TroxBot"
-                className="w-full bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-2.5 text-xs focus:outline-none text-gray-800"
+                className="w-full bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-4 py-2.5 text-xs focus:outline-none text-[#f5f0eb]"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block ml-1">
+            <label className="text-[10px] font-black text-[#5a5550] uppercase tracking-widest block ml-1">
               Floating Welcome Message Greeting
             </label>
             <textarea
@@ -213,12 +213,12 @@ export default function ChatbotSettingsPage() {
               value={welcomeMessage}
               onChange={(e) => setWelcomeMessage(e.target.value)}
               placeholder="Hi! 👋 Welcome to Trox Box. How can I help you today?"
-              className="w-full bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-2.5 text-xs focus:outline-none text-gray-800 resize-none"
+              className="w-full bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-4 py-2.5 text-xs focus:outline-none text-[#f5f0eb] resize-none"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block ml-1">
+            <label className="text-[10px] font-black text-[#5a5550] uppercase tracking-widest block ml-1">
               Strict Fallback Refusal Message
             </label>
             <textarea
@@ -227,7 +227,7 @@ export default function ChatbotSettingsPage() {
               value={fallbackMessage}
               onChange={(e) => setFallbackMessage(e.target.value)}
               placeholder="I don’t have enough information. Please contact support."
-              className="w-full bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-4 py-2.5 text-xs focus:outline-none text-gray-800 resize-none"
+              className="w-full bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-4 py-2.5 text-xs focus:outline-none text-[#f5f0eb] resize-none"
             />
           </div>
 
@@ -237,18 +237,18 @@ export default function ChatbotSettingsPage() {
         <div className="space-y-6">
           
           {/* Brand Color Picker */}
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-gray-800 border-b border-gray-100 pb-3 flex items-center space-x-1.5">
+          <div className="bg-[#141414] border border-white/[0.04] rounded-2xl p-6 shadow-sm space-y-4">
+            <h3 className="text-sm font-bold text-[#f5f0eb] border-b border-white/[0.04] pb-3 flex items-center space-x-1.5">
               <span>Theme Color Branding</span>
             </h3>
             
             <div className="flex items-center space-x-4">
               <div 
-                className="w-12 h-12 rounded-2xl border border-gray-200 flex items-center justify-center shadow-inner shrink-0"
+                className="w-12 h-12 rounded-2xl border border-white/[0.06] flex items-center justify-center shadow-inner shrink-0"
                 style={{ backgroundColor: primaryColor }}
               />
               <div className="flex-grow space-y-1">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest block">
+                <label className="text-[9px] font-black text-[#5a5550] uppercase tracking-widest block">
                   Primary Brand HEX Color
                 </label>
                 <div className="flex items-center space-x-2">
@@ -256,14 +256,14 @@ export default function ChatbotSettingsPage() {
                     type="color"
                     value={primaryColor}
                     onChange={(e) => setPrimaryColor(e.target.value)}
-                    className="w-8 h-8 rounded-lg cursor-pointer border border-gray-200 p-0.5"
+                    className="w-8 h-8 rounded-lg cursor-pointer border border-white/[0.06] p-0.5"
                   />
                   <input
                     type="text"
                     required
                     value={primaryColor}
                     onChange={(e) => setPrimaryColor(e.target.value)}
-                    className="w-full bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-3 py-1.5 text-xs font-mono focus:outline-none text-gray-800"
+                    className="w-full bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-3 py-1.5 text-xs font-mono focus:outline-none text-[#f5f0eb]"
                   />
                 </div>
               </div>
@@ -271,26 +271,26 @@ export default function ChatbotSettingsPage() {
           </div>
 
           {/* Allowed Topics Tag Manager */}
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-gray-800 border-b border-gray-100 pb-3 flex items-center space-x-1.5">
+          <div className="bg-[#141414] border border-white/[0.04] rounded-2xl p-6 shadow-sm space-y-4">
+            <h3 className="text-sm font-bold text-[#f5f0eb] border-b border-white/[0.04] pb-3 flex items-center space-x-1.5">
               <span>Allowed Chat Topics</span>
             </h3>
 
             {/* Tag List */}
             <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto pb-1">
               {allowedTopics.length === 0 ? (
-                <span className="text-[10px] text-gray-400 font-bold">No topic restrictions. Bot can discuss anything.</span>
+                <span className="text-[10px] text-[#5a5550] font-bold">No topic restrictions. Bot can discuss anything.</span>
               ) : (
                 allowedTopics.map((topic, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center space-x-1 px-2.5 py-1 bg-indigo-50 text-indigo-600 rounded-xl text-[10px] font-bold"
+                    className="inline-flex items-center space-x-1 px-2.5 py-1 bg-[#c9a87c]/10 text-[#c9a87c] rounded-xl text-[10px] font-bold"
                   >
                     <span>{topic}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveTopic(index)}
-                      className="text-indigo-400 hover:text-indigo-600 focus:outline-none"
+                      className="text-[#c9a87c] hover:text-[#c9a87c] focus:outline-none"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -300,18 +300,18 @@ export default function ChatbotSettingsPage() {
             </div>
 
             {/* Add Tag Input */}
-            <div className="flex items-center space-x-2 pt-2 border-t border-gray-100">
+            <div className="flex items-center space-x-2 pt-2 border-t border-white/[0.04]">
               <input
                 type="text"
                 value={newTopicInput}
                 onChange={(e) => setNewTopicInput(e.target.value)}
                 placeholder="Add allowed topic..."
-                className="flex-1 bg-gray-50 border border-gray-100 hover:border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl px-3 py-1.5 text-xs focus:outline-none text-gray-800"
+                className="flex-1 bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.06] focus:border-[#c9a87c] focus:ring-1 focus:ring-[#c9a87c] rounded-xl px-3 py-1.5 text-xs focus:outline-none text-[#f5f0eb]"
               />
               <button
                 type="button"
                 onClick={handleAddTopic}
-                className="p-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl transition-all focus:outline-none"
+                className="p-1.5 bg-[#c9a87c]/10 hover:bg-[#c9a87c]/10 text-[#c9a87c] rounded-xl transition-all focus:outline-none"
                 title="Add Topic Tag"
               >
                 <Plus className="w-4 h-4" />
@@ -323,11 +323,11 @@ export default function ChatbotSettingsPage() {
         </div>
 
         {/* Global Save Button (across bottom) */}
-        <div className="md:col-span-3 flex items-center justify-end space-x-3 pt-4 border-t border-gray-200/60">
+        <div className="md:col-span-3 flex items-center justify-end space-x-3 pt-4 border-t border-white/[0.06]/60">
           <button
             type="submit"
             disabled={saveLoading}
-            className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold px-8 py-3 rounded-2xl text-xs shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center space-x-2 focus:outline-none"
+            className="bg-[#c9a87c] hover:bg-[#b09878] active:bg-[#9a7d5a] text-white font-bold px-8 py-3 rounded-2xl text-xs shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center space-x-2 focus:outline-none"
           >
             {saveLoading ? (
               <>
