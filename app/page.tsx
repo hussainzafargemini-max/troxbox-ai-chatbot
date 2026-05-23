@@ -68,7 +68,7 @@ const products: ProductItem[] = [
     gradient: 'from-amber-600 via-orange-800 to-amber-950',
     badge: 'Drop',
     image:
-      'https://images.unsplash.com/photo-1576871334176-52ef066602cf?auto=format&fit=crop&w=900&q=85',
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85',
   },
 ];
 
